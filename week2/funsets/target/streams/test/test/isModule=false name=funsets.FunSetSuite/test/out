@@ -1,0 +1,14 @@
+[0m[[0minfo[0m] [0m[32mFunSetSuite:[0m[0m
+[0m[[0minfo[0m] [0m[32m- contains is implemented[0m[0m
+[0m[[0minfo[0m] [0m[32m- singletonSet(1) contains 1[0m[0m
+[0m[[0minfo[0m] [0m[32m- union contains all elements of each set[0m[0m
+[0m[[0minfo[0m] [0m[32m- intersection of a set with the empty set should be empty[0m[0m
+[0m[[0minfo[0m] [0m[32m- filter should find all elements satisfying predicate[0m[0m
+[0m[[0minfo[0m] [0m[32m- union of nonempty set and empty set should be nonempty set[0m[0m
+[0m[[0minfo[0m] [0m[32m- intersection should be associative and commutative[0m[0m
+[0m[[0minfo[0m] [0m[32m- intersection should contain only elements common to each set[0m[0m
+[0m[[0minfo[0m] [0m[32m- universal quantification and existential quantification[0m[0m
+[0m[[0minfo[0m] [0m[32m- exists: {1,2,3,4}[0m[0m
+[0m[[0minfo[0m] [0m[32m- forall: {1,2,3,4,5,1000}[0m[0m
+[0m[[0minfo[0m] [0m[31m- map (_+1) {1,2,3,4,5,6,8,8,9,1000} == {2,3,4,5,6,7,8,9,10,1001} *** FAILED ***[0m[0m
+[0m[[0minfo[0m] [0m[31m  false did not equal true (FunSetSuite.scala:220)[0m[0m
