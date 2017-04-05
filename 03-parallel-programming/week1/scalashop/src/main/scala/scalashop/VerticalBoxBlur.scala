@@ -42,9 +42,14 @@ object VerticalBoxBlur {
    *  Within each column, `blur` traverses the pixels by going from top to
    *  bottom.
    */
-  def blur(src: Img, dst: Img, from: Int, end: Int, radius: Int): Unit = {
-    // TODO implement this method using the `boxBlurKernel` method
-    ???
+  def blur(src: Img, dst: Img, start: Int, end: Int, radius: Int): Unit = {
+    // We are using a double nested for loop to show how the blur function is traversing
+    // the pixels in the strip.
+    for (x <- start until end) {
+      for (y <- 0 until src.height) {
+        dst(x, y) = boxBlurKernel(src, x, y, radius)
+      }
+    }
   }
 
   /** Blurs the columns of the source image in parallel using `numTasks` tasks.
@@ -54,8 +59,17 @@ object VerticalBoxBlur {
    *  columns.
    */
   def parBlur(src: Img, dst: Img, numTasks: Int, radius: Int): Unit = {
-    // TODO implement using the `task` construct and the `blur` method
-    ???
+    val stepSize = math.ceil(src.width.toDouble / numTasks.toDouble).toInt
+    val startingPoints = (0 until src.width by stepSize)
+    val endingPoints   = startingPoints.tail :+ src.width
+    val strips = startingPoints zip endingPoints
+    val tasks  = strips map {
+      case (start, end) => task {
+        blur(src, dst, start, end, radius)
+      }
+    }
+
+    tasks foreach { task => task.join }
   }
 
 }

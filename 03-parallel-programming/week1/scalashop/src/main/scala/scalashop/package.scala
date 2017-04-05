@@ -24,7 +24,7 @@ package object scalashop {
   }
 
   /** Restricts the integer into the specified range. */
-  def clamp(v: Int, min: Int, max: Int): Int = {
+  def clamp(v: Int, min: Int, max:  Int): Int = {
     if (v < min) min
     else if (v > max) max
     else v
@@ -39,8 +39,36 @@ package object scalashop {
 
   /** Computes the blurred RGBA value of a single pixel of the input image. */
   def boxBlurKernel(src: Img, x: Int, y: Int, radius: Int): RGBA = {
-    // TODO implement using while loops
-    ???
+    val xmin = clamp(x - radius, 0, src.width - 1)
+    val xmax = clamp(x + radius, 0, src.width - 1)
+    val ymin = clamp(y - radius, 0, src.height - 1)
+    val ymax = clamp(y + radius, 0, src.height - 1)
+    val totalPixelsX = xmax - xmin + 1
+    val totalPixelsY = ymax - ymin + 1
+    val totalPixels = totalPixelsX * totalPixelsY
+
+    var sumr = red(src(x,y))
+    var sumg = green(src(x, y))
+    var sumb = blue(src(x, y))
+    var suma = alpha(src(x, y))
+
+    for {
+      px    <- xmin until (xmax + 1)
+      py    <- ymin until (ymax + 1)
+      pixel  = src(px, py)
+    } {
+      sumr += red(pixel)
+      sumg += green(pixel)
+      sumb += blue(pixel)
+      suma += alpha(pixel)
+    }
+
+    val r = sumr / totalPixels
+    val g = sumg / totalPixels
+    val b = sumb / totalPixels
+    val a = suma / totalPixels
+
+    rgba(r, g, b, a)
   }
 
 }
