@@ -1,0 +1,13 @@
+console
+reload
+compile
+runMain scalashop.VerticalBoxBlurRunner
+runMain scalashop.HorizontalBoxBlurRunner
+runMain scalashop.ScalaShop
+runMain scalashop.HorizontalBoxBlurRunner
+runMain scalashop.VerticalBoxBlurRunner
+runMain scalashop.HorizontalBoxBlurRunner
+runMain scalashop.ScalaShop
+quit
+:q
+exit
