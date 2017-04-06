@@ -1,9 +1,0 @@
-.idea
-.idea/*
-*/.idea/*
-target
-target/*
-*/target/*
-$global
-compile
-runtime
